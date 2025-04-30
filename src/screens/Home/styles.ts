@@ -36,5 +36,66 @@ export const styles = StyleSheet.create({
     backgroundColor: '#1E6F9F',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  info:{ 
+    padding: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    top: -50,
+  },
+  created:{
+    flexDirection: 'row'
+  },
+  textCreated:{
+    color: '#4EA8DE',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginRight: 12
+  },
+  done: {
+    flexDirection: 'row',
+  },
+  textDone: {
+    color: '#8284FA',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginRight: 12
+  },
+  counter: {
+    height: 25,
+    width: 35,
+    backgroundColor: '#333333',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 50
+  },
+  textCounter: {
+    color: '#D9D9D9',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  empty: {
+    alignItems: 'center',
+    padding: 24,
+    top: -20,
+    gap: 30
+  },
+  separator: {
+    backgroundColor: '#808080',
+    height: 0.4,
+    width: '100%',
+  },
+  emptyI: {
+    color: '#808080',
+    textAlign:  'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  emptyII: {
+    color: '#808080',
+    textAlign:  'center',
+    fontSize: 18,
+    fontWeight: '300',
+    top: -25
   }
 });
