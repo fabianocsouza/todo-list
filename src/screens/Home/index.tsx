@@ -4,9 +4,11 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { styles } from './styles';
 
 import Logo from '../../assets/logo.svg'
-import Clipboard from '../../assets/clipboard.svg'
+import { Empty } from '../../components/Empty/Empty';
+import { Task } from '../../components/Task';
 
 export function Home() {
+  const task = ['Integer urna interdum massa libero auctor neque turpis turpis semper.','Fabiano Souza.', 'Leriane Tamara Nishihara']
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +30,7 @@ export function Home() {
         <View style={styles.created}>
           <Text style={styles.textCreated}>Criadas</Text>
           <View style={styles.counter}>
-            <Text style={styles.textCounter}>0</Text>
+            <Text style={styles.textCounter}>{task.length}</Text>
           </View>
         </View>
         <View style={styles.done}>
@@ -40,18 +42,14 @@ export function Home() {
       </View>
 
       <FlatList
-        data={[]}
+        data={task}
+        style={styles.list}
         keyExtractor={item => item}
         renderItem={({item}) => (
-          <Text key={item}>{item}</Text>
+          <Task key={item} title={item}/>
         )}
         ListEmptyComponent={
-          <View style={styles.empty}>
-            <View style={styles.separator}></View>
-            <Clipboard width={80} height={80} />
-            <Text style={styles.emptyI}>Você ainda não tem tarefas cadastradas</Text>
-            <Text style={styles.emptyII}>Crie tarefas e organize seus itens a fazer</Text>
-          </View>
+          <Empty/>
         }
       />
     </View>

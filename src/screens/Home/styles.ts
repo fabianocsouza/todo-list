@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     marginRight: 12,
     padding: 16,
     fontSize: 16,
+    fontFamily: 'Inter_400Regular',
     borderColor: '#0D0D0D',
     borderWidth: 1
   },
@@ -49,6 +50,7 @@ export const styles = StyleSheet.create({
   textCreated:{
     color: '#4EA8DE',
     fontSize: 18,
+    fontFamily: 'Inter_700Bold',
     fontWeight: 'bold',
     marginRight: 12
   },
@@ -58,6 +60,7 @@ export const styles = StyleSheet.create({
   textDone: {
     color: '#8284FA',
     fontSize: 18,
+    fontFamily: 'Inter_700Bold',
     fontWeight: 'bold',
     marginRight: 12
   },
@@ -72,30 +75,11 @@ export const styles = StyleSheet.create({
   textCounter: {
     color: '#D9D9D9',
     fontSize: 18,
+    fontFamily: 'Inter_700Bold',
     fontWeight: 'bold'
   },
-  empty: {
-    alignItems: 'center',
-    padding: 24,
-    top: -20,
-    gap: 30
-  },
-  separator: {
-    backgroundColor: '#808080',
-    height: 0.4,
-    width: '100%',
-  },
-  emptyI: {
-    color: '#808080',
-    textAlign:  'center',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  emptyII: {
-    color: '#808080',
-    textAlign:  'center',
-    fontSize: 18,
-    fontWeight: '300',
-    top: -25
+  list :{
+    top:-50, 
+    paddingHorizontal: 24
   }
 });
