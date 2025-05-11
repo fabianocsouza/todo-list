@@ -1,8 +1,8 @@
-import { Pressable, type PressableProps } from "react-native";
+import { useEffect, useState } from "react";
 import { Entypo } from "@expo/vector-icons";
+import { Pressable, PressableProps } from "react-native";
 
 import { styles } from "./styles";
-import { useEffect, useState } from "react";
 
 type Props = PressableProps & {
   onPressClick?: () => void;

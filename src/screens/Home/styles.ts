@@ -27,9 +27,11 @@ export const styles = StyleSheet.create({
     padding: 16,
     fontSize: 16,
     fontFamily: "Inter_400Regular",
-    borderColor: "#0D0D0D",
     borderWidth: 1,
     color: "#F2F2F2",
+  },
+  inputFocused: {
+    borderColor: "#5E60CE",
   },
   button: {
     height: 54,

@@ -1,10 +1,9 @@
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-
 import { styles } from "./styles";
 import { Pressable } from "react-native";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 type Props = {
-  onRemove?: () => void;
+  onRemove: () => void;
 };
 
 export function Trash({ onRemove }: Props) {

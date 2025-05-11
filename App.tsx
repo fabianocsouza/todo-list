@@ -6,6 +6,7 @@ import {
 } from "@expo-google-fonts/inter";
 
 import { Home } from "./src/screens/Home";
+import { TaskProvider } from "./src/Context";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -24,7 +25,9 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Home />
+      <TaskProvider>
+        <Home />
+      </TaskProvider>
     </>
   );
 }
