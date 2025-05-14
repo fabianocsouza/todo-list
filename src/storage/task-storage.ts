@@ -43,7 +43,6 @@ async function updated(id: string, isChecked: boolean) {
   );
 
   await AsyncStorage.setItem(TASKS_STORAGE_KEY, JSON.stringify(updated));
-  console.log(updated);
 }
 
 export const taskStorage = { get, save, remove, updated };

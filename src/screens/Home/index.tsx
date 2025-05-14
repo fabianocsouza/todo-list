@@ -14,32 +14,31 @@ import { styles } from "./styles";
 
 import Logo from "../../assets/logo.svg";
 
-import { useTask } from "../../hooks";
 import { Task } from "../../components/Task";
 import { Empty } from "../../components/Empty/Empty";
+
 import { taskStorage, type TaskStorage } from "../../storage/task-storage";
 
 export function Home() {
   const [isFocused, setIsFocused] = useState(false);
 
-  // const { task, addTask } = useTask();
   const [task, setTask] = useState<TaskStorage[]>([]);
   const [taskTitle, setTaskTitle] = useState("");
   const checkedCount = task.filter((task) => task.check).length;
 
   async function handleTask() {
+    if (!taskTitle.trim()) {
+      Alert.alert("Atenção", "O título da tarefa não pode estar vazio.");
+      return;
+    }
     Keyboard.dismiss();
-    // addTask(taskName);
     setTaskTitle("");
-
     try {
       await taskStorage.save({
         id: new Date().getTime().toString(),
-        title: taskTitle,
+        title: taskTitle.trim(),
         check: false,
       });
-      const data = await taskStorage.get();
-      console.log(data);
     } catch (error) {
       Alert.alert("Erro", "Não foi possível salvar task!");
       console.log(error);
@@ -58,6 +57,7 @@ export function Home() {
   useEffect(() => {
     getTasks();
   }, [task]);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -101,12 +101,7 @@ export function Home() {
         style={styles.list}
         keyExtractor={({ id }) => id}
         renderItem={({ item }) => (
-          <Task
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            isChecked={item.check}
-          />
+          <Task id={item.id} title={item.title} isChecked={item.check} />
         )}
         ListEmptyComponent={<Empty />}
       />

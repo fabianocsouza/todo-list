@@ -1,9 +1,11 @@
 import { Alert, Text, View } from "react-native";
+
 import { styles } from "./styles";
+
+import { taskStorage } from "../../storage/task-storage";
 
 import { Trash } from "../Trash";
 import { Check } from "../Check";
-import { taskStorage } from "../../storage/task-storage";
 
 type Props = {
   id: string;
@@ -33,7 +35,7 @@ export function Task({ title, id, isChecked }: Props) {
 
   return (
     <View style={[styles.container, isChecked && { borderColor: "#262626" }]}>
-      <Check value={isChecked} onPressClick={handleChecked} />
+      <Check checked={isChecked} onPressClick={handleChecked} />
       <Text style={[styles.text, isChecked && styles.textCheck]}>{title}</Text>
       <Trash onRemove={handleRemove} />
     </View>
