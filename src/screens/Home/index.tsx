@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  Alert,
   FlatList,
   Keyboard,
   Text,
@@ -16,20 +17,47 @@ import Logo from "../../assets/logo.svg";
 import { useTask } from "../../hooks";
 import { Task } from "../../components/Task";
 import { Empty } from "../../components/Empty/Empty";
+import { taskStorage, type TaskStorage } from "../../storage/task-storage";
 
 export function Home() {
   const [isFocused, setIsFocused] = useState(false);
 
-  const { task, addTask } = useTask();
-  const [taskName, setTaskName] = useState("");
+  // const { task, addTask } = useTask();
+  const [task, setTask] = useState<TaskStorage[]>([]);
+  const [taskTitle, setTaskTitle] = useState("");
   const checkedCount = task.filter((task) => task.check).length;
 
-  function handleTask() {
+  async function handleTask() {
     Keyboard.dismiss();
-    addTask(taskName);
-    setTaskName("");
+    // addTask(taskName);
+    setTaskTitle("");
+
+    try {
+      await taskStorage.save({
+        id: new Date().getTime().toString(),
+        title: taskTitle,
+        check: false,
+      });
+      const data = await taskStorage.get();
+      console.log(data);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível salvar task!");
+      console.log(error);
+    }
   }
 
+  async function getTasks() {
+    try {
+      const response = await taskStorage.get();
+      setTask(response);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível listar as tarefas");
+    }
+  }
+
+  useEffect(() => {
+    getTasks();
+  }, [task]);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -43,8 +71,8 @@ export function Home() {
           onBlur={() => setIsFocused(false)}
           placeholder="Adicione uma nova tarefa"
           placeholderTextColor="#808080"
-          value={taskName}
-          onChangeText={setTaskName}
+          value={taskTitle}
+          onChangeText={setTaskTitle}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleTask}>
@@ -71,9 +99,14 @@ export function Home() {
       <FlatList
         data={task}
         style={styles.list}
-        keyExtractor={({ title }) => title}
-        renderItem={({ index, item }) => (
-          <Task key={index} id={index} title={item.title} />
+        keyExtractor={({ id }) => id}
+        renderItem={({ item }) => (
+          <Task
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            isChecked={item.check}
+          />
         )}
         ListEmptyComponent={<Empty />}
       />

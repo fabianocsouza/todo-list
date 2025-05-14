@@ -1,28 +1,34 @@
-import React, { useState } from "react";
-import { Text, View } from "react-native";
-
+import { Alert, Text, View } from "react-native";
 import { styles } from "./styles";
 
 import { Trash } from "../Trash";
 import { Check } from "../Check";
-import { useTask } from "../../hooks";
+import { taskStorage } from "../../storage/task-storage";
 
 type Props = {
-  id: number;
+  id: string;
   title: string;
+  isChecked: boolean;
 };
 
-export function Task({ title, id }: Props) {
-  const [isChecked, setIsChecked] = useState(false);
-  const { task, toggleCheck, updateTask } = useTask();
+export function Task({ title, id, isChecked }: Props) {
+  async function handleChecked() {
+    await taskStorage.updated(id, !isChecked);
+  }
 
-  function handleChecked() {
-    setIsChecked(!isChecked);
-    toggleCheck(id);
+  async function taskRemove() {
+    try {
+      await taskStorage.remove(id);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível remover!");
+    }
   }
 
   function handleRemove() {
-    updateTask(task.filter((item) => item.title !== title));
+    Alert.alert("Excluir", "Deseja realmente excluir?", [
+      { style: "cancel", text: "Não" },
+      { text: "Sim", onPress: taskRemove },
+    ]);
   }
 
   return (

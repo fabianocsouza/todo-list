@@ -4,7 +4,11 @@
     "strict": true,
     "jsx": "react-native",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
+    "module": "node16",
+    "customConditions": [
+      "custom"
+    ],
     "target": "esnext"
   }
 }
