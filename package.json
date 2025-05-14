@@ -1,6 +1,8 @@
 {
   "name": "todo-list",
   "version": "1.0.0",
+  "description": "Implementation of a list project, with the aim of establishing the fundamentals of React Native",
+  "license": "MIT",
   "main": "index.ts",
   "scripts": {
     "start": "expo start",
